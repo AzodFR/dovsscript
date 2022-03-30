@@ -1,0 +1,241 @@
+<template>
+  <div></div>
+</template>
+
+<script>
+const time = 15000;
+export default {
+  name: "Interval",
+  async mounted() {
+    this.checkRPC();
+    this.launchCheck();
+    this.fetchTokens();
+    this.launchFetchStake();
+    this.launchIntervalTokens();
+    this.fetchItems("user");
+    this.launchIntervalItems();
+  },
+  methods: {
+    launchCheck: async function () {
+      setInterval(async () => {
+        this.checkRPC()
+      }, 600000)
+    },
+    checkRPC: async function () {
+      let valid = false;
+
+      setTimeout(() => {
+        if (valid) {
+          valid = false
+          console.log("rpc checked")
+        }
+        else {
+          console.log("fuck rpc")
+          localStorage.setItem('rpc', 'random');
+          if (!localStorage.getItem("autoLogin") || localStorage.getItem("autoLogin") == "false") {
+            localStorage.setItem("autoLogin", "rpc")
+          }
+          window.location.href = "/"
+        }
+      }, 20000);
+      try {
+        await fetch(
+          `${this.$store.state.user.wax.rpc.endpoint}/v1/chain/get_table_rows`,
+          {
+            credentials: "omit",
+            headers: {
+              Accept: "*/*",
+              "Accept-Language": "fr,fr-FR;q=0.8,en-US;q=0.5,en;q=0.3",
+              "Content-Type": "text/plain;charset=UTF-8",
+              "Sec-Fetch-Dest": "empty",
+              "Sec-Fetch-Mode": "no-cors",
+              "Sec-Fetch-Site": "cross-site",
+            },
+            referrer: "https://thedefimining.io/",
+            body: `{\"json\":true,\"code\":\"farmersworld\",\"scope\":\"farmersworld\",\"table\":\"accounts\",\"table_key\":\"\",\"lower_bound\":\"${this.$store.state.user.name}\",\"upper_bound\":\"${this.$store.state.user.name}\",\"limit\":\"100\",\"reverse\":false,\"show_payer\":false}`,
+            method: "POST",
+            mode: "cors",
+          }
+        ).then((e) => {
+          console.log("check", e)
+          valid = true
+        }
+        )
+          .catch((e) => {
+            console.log("fuck rpc")
+            localStorage.setItem('rpc', 'random');
+            if (!localStorage.getItem("autoLogin") || localStorage.getItem("autoLogin") == "false") {
+              localStorage.setItem("autoLogin", "rpc")
+            }
+            window.location.href = "/"
+          })
+      }
+      catch (e) {
+        onsole.log("fuck rpc")
+        localStorage.setItem('rpc', 'random');
+        if (!localStorage.getItem("autoLogin") || localStorage.getItem("autoLogin") == "false") {
+          localStorage.setItem("autoLogin", "rpc")
+        }
+        window.location.href = "/"
+      }
+
+    },
+    launchFetchStake: function () {
+      this.fetchStake();
+      setInterval(() => {
+        this.fetchStake();
+      }, time)
+    },
+    fetchStake: async function () {
+      await fetch("https://chain.wax.io/v1/chain/get_account", {
+        "credentials": "omit",
+        "headers": {
+          "Accept-Language": "fr,fr-FR;q=0.8,en-US;q=0.5,en;q=0.3",
+          "Content-Type": "text/plain;charset=UTF-8",
+          "Sec-Fetch-Dest": "empty",
+          "Sec-Fetch-Mode": "no-cors",
+          "Sec-Fetch-Site": "cross-site",
+        },
+        "referrer": "https://fw.f12key.xyz/",
+        "body": `{\"account_name\":\"${this.$store.state.user.name}\"}`,
+        "method": "POST",
+        "mode": "cors"
+      }).then((x) => x.json())
+        .then(async (rows) => {
+          this.$store.commit("user/setStake", parseFloat(rows.total_resources.cpu_weight.split(" ")[0]).toFixed(2));
+          this.$store.commit("user/setCPU", (rows.cpu_limit.used * 100 / rows.cpu_limit.max).toFixed(0));
+        })
+    },
+    launchIntervalItems: function () {
+      setInterval(() => {
+        this.fetchItems("user");
+      }, time);
+    },
+    async fetchItems(item) {
+      await fetch("https://wax.greymass.com/v1/chain/get_table_rows", {
+        credentials: "omit",
+        headers: {
+          Accept: "*/*",
+          "Accept-Language": "fr,fr-FR;q=0.8,en-US;q=0.5,en;q=0.3",
+          "Content-Type": "text/plain;charset=UTF-8",
+          "Sec-Fetch-Dest": "empty",
+          "Sec-Fetch-Mode": "no-cors",
+          "Sec-Fetch-Site": "cross-site",
+        },
+        referrer: "https://play.farmersworld.io/",
+        body: `{\"json\":true,\"code\":\"dovsmartrepo\",\"scope\":\"dovsmartrepo\",\"table\":\"${item}\",\"table_key\":\"\",\"lower_bound\":\"${this.$store.state.user.name}\",\"upper_bound\":\"${this.$store.state.user.name}\",\"limit\":\"1\",\"reverse\":false,\"show_payer\":false}`,
+        method: "POST",
+        mode: "cors",
+      })
+        .then((x) => x.json())
+        .then(async (items) => {
+          if (items.rows.length <= 0) return;
+          console.log(items.rows[0].data[0]);
+          const data = items.rows[0].data[0];
+          const elem = {
+            name: data.pool,
+            next_availability: data.last_claim * 1000 + (((localStorage.vip) ? parseInt(localStorage.vip) : 1) * 3600000),
+            asset_id: "1",
+            charged_time: 3600,
+          }
+          if (!this.$store.state.user.logged_asset.includes(elem.asset_id)) {
+            this.$store.commit("user/addAsset", elem.asset_id);
+          }
+          if (localStorage.getItem(`${elem.asset_id}`)) {
+            if (localStorage.getItem(`${elem.asset_id}`) == "true") {
+              this.$store.commit("user/setAutoClaim", {
+                type: "pool",
+                id: elem.asset_id,
+                value: true,
+              });
+              this.checker = true;
+            } else {
+              this.$store.commit("user/setAutoClaim", {
+                type: "pool",
+                id: elem.asset_id,
+                value: false,
+              });
+            }
+          }
+          this.$store.commit("user/setItem", { value: [elem], type: "pool" });
+        })
+    },
+    async launchIntervalTokens() {
+      this.fetchTokens();
+      setInterval(() => {
+        this.fetchTokens();
+      }, time);
+    },
+    async fetchTokens() {
+      await fetch(
+        `${this.$store.state.user.wax.rpc.endpoint}/v1/chain/get_currency_balance`,
+        {
+          credentials: "omit",
+          headers: {
+            Accept: "*/*",
+            "Accept-Language": "fr,fr-FR;q=0.8,en-US;q=0.5,en;q=0.3",
+            "Content-Type": "text/plain;charset=UTF-8",
+            "Sec-Fetch-Dest": "empty",
+            "Sec-Fetch-Mode": "no-cors",
+            "Sec-Fetch-Site": "cross-site",
+          },
+          referrer: "https://thedefimining.io/",
+          body: `{\"code\":\"dovvaultfort\",\"account\":\"${this.$store.state.user.name}\"}`,
+          method: "POST",
+          mode: "cors",
+        }
+      )
+        .then((x) => x.json())
+        .then((y) => {
+          const sym = ["DOVX"];
+          for (let i = 0; i < 1; i++) {
+            if (i >= y.length) {
+              this.$store.commit("user/setToken", {
+                type: sym[i],
+                value: "0.0000",
+              });
+            } else {
+              this.$store.commit("user/setToken", {
+                type: y[i].split(" ")[1],
+                value: y[i] != undefined ? y[i].split(" ")[0] : "0.0000",
+              });
+            }
+          }
+        });
+
+      await fetch(
+        `${this.$store.state.user.wax.rpc.endpoint}/v1/chain/get_currency_balance`,
+        {
+          credentials: "omit",
+          headers: {
+            Accept: "*/*",
+            "Accept-Language": "fr,fr-FR;q=0.8,en-US;q=0.5,en;q=0.3",
+            "Content-Type": "text/plain;charset=UTF-8",
+            "Sec-Fetch-Dest": "empty",
+            "Sec-Fetch-Mode": "no-cors",
+            "Sec-Fetch-Site": "cross-site",
+          },
+          referrer: "https://thedefimining.io/",
+          body: `{\"code\":\"eosio.token\",\"account\":\"${this.$store.state.user.name}\",\"symbol\":\"WAX\"}`,
+          method: "POST",
+          mode: "cors",
+        }
+      )
+        .then((x) => x.json())
+        .then((y) => {
+          if (y[0] == undefined) {
+            this.$store.commit("user/setToken", {
+              type: "WAX",
+              value: "0.0000",
+            });
+          } else {
+            this.$store.commit("user/setToken", {
+              type: "WAX",
+              value: y[0] != undefined ? y[0].split(" ")[0] : "0.0000",
+            });
+          }
+        });
+    },
+  },
+};
+</script>

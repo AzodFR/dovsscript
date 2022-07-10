@@ -14,6 +14,9 @@
   "Energy": {
     "description": "Auto imported from components/Energy.vue"
   },
+  "Fees": {
+    "description": "Auto imported from components/Fees.vue"
+  },
   "Footer": {
     "description": "Auto imported from components/Footer.vue"
   },

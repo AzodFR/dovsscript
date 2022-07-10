@@ -33,16 +33,35 @@
         </div>
       </div>
       <div class="wax-info">
-        <div class="wax-title">
-          DOV
-          <label class="wax-value"
-            >{{ parseFloat(user.tokens["DOVX"]).toFixed(2) }} DOVX</label
-          >
-        </div>
+         <div class="token-div">
+        <label class="token-title">Tokens:</label>
+        <p class="game-info-t">{{ user.tokens["DOVX"] }}</p>
+        <p class="game-info-t">{{ user.tokens["DOVH"] }}</p>
+        <p class="game-info-t">{{ user.tokens["DOVF"] }}</p>
+        <p class="game-info-t">{{ user.tokens["DOVR"] }}</p>
+        <p class="game-info-t">{{ user.tokens["DOVS"] }}</p>
+      </div>
+      <div class="ingame-div">
+        <label class="ingame-title">InGame:</label>
+        <p class="game-info">{{ user.ressources["DOVX"] }}</p>
+        <p class="game-info">{{ user.ressources["DOVH"] }}</p>
+        <p class="game-info">{{ user.ressources["DOVF"] }}</p>
+        <p class="game-info">{{ user.ressources["DOVR"] }}</p>
+        <p class="game-info">{{ user.ressources["DOVS"] }}</p>
+      </div>
+      <div class="daily-div">
+        <label class="daily-title">Type:</label>
+        <p>DOVX</p>
+        <p>DOVH</p>
+        <p>DOVF</p>
+        <p>DOVR</p>
+        <p>DOVS</p>
+      </div>
       </div>
       <div style="display: flex">
         <b-button size="sm" v-b-tooltip.hover title="Activate this to refresh the page every 30 min." :variant="autologin ? 'success': 'danger'" @click="switchLog">AutoLogin: {{autologin ? "ON" : "OFF"}}</b-button>
       </div>
+      <Fees />
     </div>
     <div class="items" v-if="this['user/getItems']['pool'].length">
       <ItemClaim
@@ -89,6 +108,7 @@ import ItemClaim from "./ItemClaim.vue";
 import Buffer from "./Buffer.vue";
 import DefiLogo from "./DefiLogo.vue";
 import { mapGetters } from "vuex";
+import Fees from './Fees.vue';
 export default {
   name: "Test",
   data() {
@@ -103,7 +123,7 @@ export default {
       return this.$store.state.user;
     },
   },
-  components: { ItemClaim, Buffer, DefiLogo },
+  components: { ItemClaim, Buffer, DefiLogo, Fees},
   methods: {
     switchLog: function(){
       this.autologin = !this.autologin

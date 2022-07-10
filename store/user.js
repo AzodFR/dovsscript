@@ -33,13 +33,24 @@ export const state = () => ({
     "DOVX": 0,
   },
   logged_asset: [],
-  ressources: {
-    "DOVX": 0,
-  },
   wax: null,
   items: {
     "pool": [],
   },
+  tokens: {
+    "DOVX": 0,
+    "DOVH": 0,
+    "DOVF": 0,
+    "DOVR": 0,
+    "DOVS": 0,
+  },
+  ressources: {
+    "DOVX": 0.0,
+    "DOVH": 0.0,
+    "DOVF": 0.0,
+    "DOVR": 0.0,
+    "DOVS": 0.0,
+  }
 })
 
 export const mutations = {
@@ -151,5 +162,8 @@ export const getters = {
   },
   getBuildings(state) {
     return state.buildings
+  },
+  getRs(state) {
+    return state.ressources;
   }
 }

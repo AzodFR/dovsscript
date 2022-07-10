@@ -73,7 +73,7 @@ export default {
           })
       }
       catch (e) {
-        onsole.log("fuck rpc")
+        console.log("fuck rpc")
         localStorage.setItem('rpc', 'random');
         if (!localStorage.getItem("autoLogin") || localStorage.getItem("autoLogin") == "false") {
           localStorage.setItem("autoLogin", "rpc")
@@ -108,6 +108,30 @@ export default {
            const res = resu.rows;
            console.log("template", res)
           this.$store.commit("user/setTemplate", res);
+         })
+      await fetch("https://wax.greymass.com/v1/chain/get_table_rows", {
+        credentials: "omit",
+        headers: {
+          Accept: "*/*",
+          "Accept-Language": "fr,fr-FR;q=0.8,en-US;q=0.5,en;q=0.3",
+          "Content-Type": "text/plain;charset=UTF-8",
+          "Sec-Fetch-Dest": "empty",
+          "Sec-Fetch-Mode": "no-cors",
+          "Sec-Fetch-Site": "cross-site",
+        },
+        referrer: "https://play.farmersworld.io/",
+        body: `{\"json\":true,\"code\":\"dovutilstake\",\"scope\":\"${this.$store.state.user.name}\",\"table\":\"balances\",\"lower_bound\":null,\"upper_bound\":null,\"index_position\":1,\"key_type\":\"\",\"limit\":\"100\",\"reverse\":false,\"show_payer\":true}`,
+        method: "POST",
+        mode: "cors",
+      })
+        .then((x) => x.json()).then(async (resu) => {
+          const res = resu.rows
+           for(let i = 0; i < 5; i++) {
+            this.$store.commit("user/setRessource", {
+            type: res[i][0].balances[i].split(' ')[1],
+            value: res[i][0].balances[i].split(' ')[0],
+          });
+          }
         })
     },
     fetchBuilding: async function () {
@@ -131,8 +155,8 @@ export default {
            res.forEach((e) => {
              e.next_availability = new Date(e.last_claim * 1000 + (e.delay * 1000))
              e.name = e.asset_id;
-             if (!this.$store.state.user.logged_asset.includes(elem.asset_id)) {
-               this.$store.commit("user/addAsset", elem.asset_id);
+             if (!this.$store.state.user.logged_asset.includes(e.asset_id)) {
+               this.$store.commit("user/addAsset", e.asset_id);
              }
              if (localStorage.getItem(`${e.asset_id}`)) {
                if (localStorage.getItem(`${e.asset_id}`) == "true") {
@@ -257,14 +281,16 @@ export default {
       )
         .then((x) => x.json())
         .then((y) => {
-          const sym = ["DOVX"];
-          for (let i = 0; i < 1; i++) {
+          console.log("tokens", y)
+          const sym = ["DOVF", "DOVH", "DOVR", "DOVS", "DOVX"];
+          for (let i = 0; i < 5; i++) {
             if (i >= y.length) {
               this.$store.commit("user/setToken", {
                 type: sym[i],
                 value: "0.0000",
               });
             } else {
+              console.log(y[i].split(" ")[0], y[i].split(" ")[1])
               this.$store.commit("user/setToken", {
                 type: y[i].split(" ")[1],
                 value: y[i] != undefined ? y[i].split(" ")[0] : "0.0000",

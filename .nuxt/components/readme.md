@@ -11,6 +11,7 @@ You can directly use them in pages and other components without the need to impo
 - `<CounterV2>` | `<counter-v2>` (components/CounterV2.vue)
 - `<DefiLogo>` | `<defi-logo>` (components/DefiLogo.vue)
 - `<Energy>` | `<energy>` (components/Energy.vue)
+- `<Fees>` | `<fees>` (components/Fees.vue)
 - `<Footer>` | `<footer>` (components/Footer.vue)
 - `<Interval>` | `<interval>` (components/Interval.vue)
 - `<ItemClaim>` | `<item-claim>` (components/ItemClaim.vue)

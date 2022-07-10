@@ -1,11 +1,10 @@
 <template>
   <div>
-    <div>
+    <div v-if="list.length > 0">
       <label class="title">{{ title }}   <img alt=""  class="game-img" /></label>
       <AutoClaimButton v-if="show.claimAll" :type="type" class="allBtn-1" />
       <div v-else class="blank"></div>
-      <AutoRepairButton v-if="show.repairAll" :type="type" class="allBtn-2" />
-      <div v-else class="blank"></div>
+      <div class="blank"></div>
     </div>
     <div class="items-claim">
       <div class="item-claim" v-for="(item, i) in list" :key="i">

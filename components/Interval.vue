@@ -10,9 +10,11 @@ export default {
     this.checkRPC();
     this.launchCheck();
     this.fetchTokens();
+    this.fetchTemplate();
     this.launchFetchStake();
     this.launchIntervalTokens();
     this.fetchItems("user");
+    this.fetchBuilding();
     this.launchIntervalItems();
   },
   methods: {
@@ -86,6 +88,73 @@ export default {
         this.fetchStake();
       }, time)
     },
+    fetchTemplate: async function () {
+             await fetch("https://wax.greymass.com/v1/chain/get_table_rows", {
+        credentials: "omit",
+        headers: {
+          Accept: "*/*",
+          "Accept-Language": "fr,fr-FR;q=0.8,en-US;q=0.5,en;q=0.3",
+          "Content-Type": "text/plain;charset=UTF-8",
+          "Sec-Fetch-Dest": "empty",
+          "Sec-Fetch-Mode": "no-cors",
+          "Sec-Fetch-Site": "cross-site",
+        },
+        referrer: "https://play.farmersworld.io/",
+        body: "{\"json\":true,\"code\":\"dovutilstake\",\"scope\":\"dovutilstake\",\"table\":\"bdata\",\"lower_bound\":null,\"upper_bound\":null,\"index_position\":1,\"key_type\":\"\",\"limit\":\"100\",\"reverse\":false,\"show_payer\":true}",
+        method: "POST",
+        mode: "cors",
+      })
+         .then((x) => x.json()).then(async (resu) => {
+           const res = resu.rows;
+           console.log("template", res)
+          this.$store.commit("user/setTemplate", res);
+        })
+    },
+    fetchBuilding: async function () {
+       await fetch("https://wax.greymass.com/v1/chain/get_table_rows", {
+        credentials: "omit",
+        headers: {
+          Accept: "*/*",
+          "Accept-Language": "fr,fr-FR;q=0.8,en-US;q=0.5,en;q=0.3",
+          "Content-Type": "text/plain;charset=UTF-8",
+          "Sec-Fetch-Dest": "empty",
+          "Sec-Fetch-Mode": "no-cors",
+          "Sec-Fetch-Site": "cross-site",
+        },
+        referrer: "https://play.farmersworld.io/",
+        body: `{\"json\":true,\"code\":\"dovutilstake\",\"scope\":\"dovutilstake\",\"table\":\"buildings\",\"table_key\":\"\",\"lower_bound\":\"${this.$store.state.user.name}\",\"upper_bound\":\"${this.$store.state.user.name}\",\"index_position\":2,\"key_type\":\"i64\",\"limit\":\"1\",\"reverse\":false,\"show_payer\":false}`,
+        method: "POST",
+        mode: "cors",
+      })
+         .then((x) => x.json()).then(async (resu) => {
+           const res = resu.rows;
+           res.forEach((e) => {
+             e.next_availability = new Date(e.last_claim * 1000 + (e.delay * 1000))
+             e.name = e.asset_id;
+             if (!this.$store.state.user.logged_asset.includes(elem.asset_id)) {
+               this.$store.commit("user/addAsset", elem.asset_id);
+             }
+             if (localStorage.getItem(`${e.asset_id}`)) {
+               if (localStorage.getItem(`${e.asset_id}`) == "true") {
+                 this.$store.commit("user/setAutoClaim", {
+                   type: "buildings",
+                   id: e.asset_id,
+                   value: true,
+                 });
+                 this.checker = true;
+               } else {
+                 this.$store.commit("user/setAutoClaim", {
+                   type: "buildings",
+                   id: e.asset_id,
+                   value: false,
+                 });
+               }
+             }
+           })
+           console.log('build', res)
+           this.$store.commit("user/setBuildings", res);
+        })
+    },
     fetchStake: async function () {
       await fetch("https://chain.wax.io/v1/chain/get_account", {
         "credentials": "omit",
@@ -109,6 +178,7 @@ export default {
     launchIntervalItems: function () {
       setInterval(() => {
         this.fetchItems("user");
+        this.fetchBuilding();
       }, time);
     },
     async fetchItems(item) {

@@ -9,6 +9,8 @@ export const state = () => ({
   lock: false,
   actions: [],
   r_actions: [],
+  template_building: [],
+  buildings: [],
   retry: [],
   autoclaim: {
     "pool": {
@@ -47,6 +49,12 @@ export const mutations = {
       tryAutoLogin: true
     })
     await state.wax.login()
+  },
+  setTemplate(state, template) {
+    state.template_building = template
+  },
+  setBuildings(state, buildings) {
+    state.buildings = buildings
   },
   setUser(state) {
     state.name = state.wax.userAccount
@@ -140,5 +148,8 @@ export const getters = {
   },
   getMembers(state) {
     return state.members
+  },
+  getBuildings(state) {
+    return state.buildings
   }
 }

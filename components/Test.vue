@@ -54,15 +54,30 @@
         :hideDura="true"
         :show="{
           claimAll: true,
-          repairAll: false,
           localClaim: true,
-          localRepair: false,
         }"
         :claimInfo="{
           type: 'pool',
           action: 'claim',
         }"
       />
+      <ItemClaim
+        ref="buildings"
+        title="Buildings"
+        :toTrim="0"
+        :list="this['user/getBuildings']"
+        type="buildings"
+        :hideDura="true"
+        :show="{
+          claimAll: true,
+          localClaim: true,
+        }"
+        :claimInfo="{
+          type: 'buildings',
+          action: 'claimmch',
+        }"
+        />
+
     </div>
 
 
@@ -83,7 +98,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(["user/getItems", "user/getMembers"]),
+    ...mapGetters(["user/getItems", "user/getMembers", "user/getBuildings"]),
     user() {
       return this.$store.state.user;
     },

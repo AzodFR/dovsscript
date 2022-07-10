@@ -159,15 +159,17 @@ export default {
         this.queued = true;
         try {
 
-          const data = {
+          const data = this.claiminfo.type == "pool" ? {
                   _user: this.$store.state.user.name,
+          } : {
+                  asset_ids: [this.item.asset_id],
                 };
 
 
           const action = {
             actions: [
               {
-                account: "dovsmartrepo",
+                account: this.claiminfo.type == "pool" ? "dovsmartrepo" : "dovutilstake",
                 name: this.claiminfo.action,
                 authorization: [
                   {

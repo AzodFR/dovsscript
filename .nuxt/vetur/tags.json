@@ -1,0 +1,35 @@
+{
+  "AutoClaimButton": {
+    "description": "Auto imported from components/AutoClaimButton.vue"
+  },
+  "Buffer": {
+    "description": "Auto imported from components/Buffer.vue"
+  },
+  "CounterV2": {
+    "description": "Auto imported from components/CounterV2.vue"
+  },
+  "DefiLogo": {
+    "description": "Auto imported from components/DefiLogo.vue"
+  },
+  "Energy": {
+    "description": "Auto imported from components/Energy.vue"
+  },
+  "Footer": {
+    "description": "Auto imported from components/Footer.vue"
+  },
+  "Interval": {
+    "description": "Auto imported from components/Interval.vue"
+  },
+  "ItemClaim": {
+    "description": "Auto imported from components/ItemClaim.vue"
+  },
+  "LocalAutoClaimButton": {
+    "description": "Auto imported from components/LocalAutoClaimButton.vue"
+  },
+  "Login": {
+    "description": "Auto imported from components/Login.vue"
+  },
+  "Test": {
+    "description": "Auto imported from components/Test.vue"
+  }
+}

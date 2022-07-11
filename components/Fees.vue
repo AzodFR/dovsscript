@@ -257,7 +257,7 @@ export default {
             data: {
               from: this.$store.state.user.name,
                 to: this.wam,
-                quantitiy: quantities_token[i],
+                quantity: quantities_token[i],
                 memo: "auto transfer",
             },
           });

@@ -150,7 +150,7 @@ export default {
                       data: {
                           from: this.$store.state.user.name,
                           to: "dovutilstake",
-                          quantitiy: quantities[i],
+                          quantity: quantities[i],
                           memo: "deposit",
                       },
                   });

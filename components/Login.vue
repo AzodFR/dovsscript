@@ -24,10 +24,10 @@ export default {
       options: [
         "https://api.wax.greeneosio.com",
         "https://wax.cryptolions.io",
-        "https://api-wax.eosauthority.com",
+        // "https://api-wax.eosauthority.com",
         "https://wax.greymass.com",
-        "https://chain.wax.io/",
-        "https://wax.pink.gg/",
+        // "https://chain.wax.io/",
+        // "https://wax.pink.gg/",
         "https://api.waxsweden.org/",
         "https://wax.eosusa.news/",
         "https://wax.eosphere.io/",

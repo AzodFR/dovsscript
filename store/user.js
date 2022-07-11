@@ -16,11 +16,17 @@ export const state = () => ({
     "pool": {
       "global": false,
     },
+    "buildings": {
+      "global": false,
+    }
   },
   autorepair: {
     "pool": {
       "global": false,
     },
+    "buildings": {
+      "global": false,
+    }
   },
   tokens: {
     "WAX": 0,
@@ -36,6 +42,7 @@ export const state = () => ({
   wax: null,
   items: {
     "pool": [],
+    "buildings": [],
   },
   tokens: {
     "DOVX": 0,

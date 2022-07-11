@@ -89,7 +89,7 @@ export default {
       }, time)
     },
     fetchTemplate: async function () {
-             await fetch("https://wax.greymass.com/v1/chain/get_table_rows", {
+      await fetch("https://wax.greymass.com/v1/chain/get_table_rows", {
         credentials: "omit",
         headers: {
           Accept: "*/*",
@@ -104,11 +104,13 @@ export default {
         method: "POST",
         mode: "cors",
       })
-         .then((x) => x.json()).then(async (resu) => {
-           const res = resu.rows;
-           console.log("template", res)
+        .then((x) => x.json()).then(async (resu) => {
+          const res = resu.rows;
+          console.log("template", res)
           this.$store.commit("user/setTemplate", res);
-         })
+        })
+    },
+    async fetchRss() {
       await fetch("https://wax.greymass.com/v1/chain/get_table_rows", {
         credentials: "omit",
         headers: {
@@ -126,10 +128,12 @@ export default {
       })
         .then((x) => x.json()).then(async (resu) => {
           const res = resu.rows
-           for(let i = 0; i < 5; i++) {
+          console.log("resss", res)
+          for (let i = 0; i < 4; i++) {
+            console.log("resi", res[i].data)
             this.$store.commit("user/setRessource", {
-            type: res[i][0].balances[i].split(' ')[1],
-            value: res[i][0].balances[i].split(' ')[0],
+            type: res[i].data.balance.split(' ')[1],
+            value: res[i].data.balance.split(' ')[0],
           });
           }
         })
@@ -146,12 +150,13 @@ export default {
           "Sec-Fetch-Site": "cross-site",
         },
         referrer: "https://play.farmersworld.io/",
-        body: `{\"json\":true,\"code\":\"dovutilstake\",\"scope\":\"dovutilstake\",\"table\":\"buildings\",\"table_key\":\"\",\"lower_bound\":\"${this.$store.state.user.name}\",\"upper_bound\":\"${this.$store.state.user.name}\",\"index_position\":2,\"key_type\":\"i64\",\"limit\":\"1\",\"reverse\":false,\"show_payer\":false}`,
+        body: `{\"json\":true,\"code\":\"dovutilstake\",\"scope\":\"dovutilstake\",\"table\":\"buildings\",\"table_key\":\"\",\"lower_bound\":\"${this.$store.state.user.name}\",\"upper_bound\":\"${this.$store.state.user.name}\",\"index_position\":2,\"key_type\":\"i64\",\"limit\":\"10\",\"reverse\":false,\"show_payer\":false}`,
         method: "POST",
         mode: "cors",
       })
          .then((x) => x.json()).then(async (resu) => {
            const res = resu.rows;
+           const newList = [];
            res.forEach((e) => {
              e.next_availability = new Date(e.last_claim * 1000 + (e.delay * 1000))
              e.name = e.asset_id;
@@ -174,9 +179,13 @@ export default {
                  });
                }
              }
+             newList.push(e);
            })
            console.log('build', res)
            this.$store.commit("user/setBuildings", res);
+           if (newList.length) {
+            this.$store.commit("user/setItem", { value: newList, type: "buildings" });
+          }
         })
     },
     fetchStake: async function () {
@@ -256,8 +265,10 @@ export default {
     },
     async launchIntervalTokens() {
       this.fetchTokens();
+      this.fetchRss();
       setInterval(() => {
         this.fetchTokens();
+        this.fetchRss();
       }, time);
     },
     async fetchTokens() {

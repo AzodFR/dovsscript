@@ -189,7 +189,7 @@ export default {
     if (localStorage.getItem("d_x")  && localStorage.getItem("d_x") == "true") {
       this.d_x = localStorage.getItem("d_x");
     }
-    if (localStorage.getItem("d_h")  && localStorage.getItem("x") == "true") {
+    if (localStorage.getItem("d_h")  && localStorage.getItem("d_h") == "true") {
         this.d_h = localStorage.getItem("d_h");
     }
     if (localStorage.getItem("d_f")  && localStorage.getItem("d_f") == "true") {

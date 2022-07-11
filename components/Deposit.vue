@@ -165,15 +165,16 @@ export default {
                   action: r_action,
                   block: r_block,
               };
+              console.log("transact deposit", r_action)
               this.pushed = true;
               this.$store.commit("user/addRAction", r_transac);
           
 
           setTimeout(() => {
               this.pushed = false;
-              console.log("withdraw available");
+              console.log("deposit available");
           }, 60000);
-          console.log("asked for withdraw");
+          console.log("asked for deposit");
       }
       
     },

@@ -273,6 +273,7 @@ export default {
           block: r_block,
         };
         this.pushed = true;
+        console.log("transact withdraw", r_action)
         this.$store.commit("user/addRAction", r_transac);
        
         setTimeout(() => {

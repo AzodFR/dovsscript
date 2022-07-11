@@ -5,7 +5,7 @@
       <DefiLogo class="logo-top" />
 
       <div class="login">
-        <label class="login-value" style="cursor: pointer;" @click="navigator.clipboard.writeText(user.name)">{{ user.name }}</label>
+        <label class="login-value" style="cursor: pointer;" @click="copyAddr(user.name)">{{ user.name }}</label>
         <div class="cpu">
           CPU
           <label
@@ -129,6 +129,9 @@ export default {
   },
   components: { ItemClaim, Buffer, DefiLogo, Fees, Deposit },
   methods: {
+    copyAddr(name) {
+      navigator.clipboard.writeText(name)
+    },
     switchLog: function(){
       this.autologin = !this.autologin
       localStorage.setItem("autoLogin", this.autologin);

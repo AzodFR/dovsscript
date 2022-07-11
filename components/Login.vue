@@ -22,6 +22,7 @@ export default {
     return {
       wait: false,
       options: [
+        "https://dovx-wax-rpc.global.binfra.one",
         "https://api.wax.greeneosio.com",
         "https://wax.cryptolions.io",
         // "https://api-wax.eosauthority.com",
@@ -38,7 +39,7 @@ export default {
         "https://wax.dapplica.com",
         "https://wax.eosphere.com",*/
       ],
-      selected: "https://api.wax.greeneosio.com",
+      selected: "https://dovx-wax-rpc.global.binfra.one",
     };
   },
   methods: {

@@ -81,7 +81,7 @@
         }"
       />
       </div>
-      <div class="items" v-if="this['user/getItems']['buildings'].length"></div>
+      <div class="items" v-if="this['user/getItems']['buildings'].length">
       <ItemClaim
         ref="buildings"
         title="Buildings"

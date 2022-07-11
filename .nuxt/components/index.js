@@ -1,16 +1,16 @@
-export { default as AutoClaimButton } from '../..\\components\\AutoClaimButton.vue'
-export { default as Buffer } from '../..\\components\\Buffer.vue'
-export { default as CounterV2 } from '../..\\components\\CounterV2.vue'
-export { default as DefiLogo } from '../..\\components\\DefiLogo.vue'
-export { default as Deposit } from '../..\\components\\Deposit.vue'
-export { default as Energy } from '../..\\components\\Energy.vue'
-export { default as Fees } from '../..\\components\\Fees.vue'
-export { default as Footer } from '../..\\components\\Footer.vue'
-export { default as Interval } from '../..\\components\\Interval.vue'
-export { default as ItemClaim } from '../..\\components\\ItemClaim.vue'
-export { default as LocalAutoClaimButton } from '../..\\components\\LocalAutoClaimButton.vue'
-export { default as Login } from '../..\\components\\Login.vue'
-export { default as Test } from '../..\\components\\Test.vue'
+export const AutoClaimButton = () => import('../..\\components\\AutoClaimButton.vue' /* webpackChunkName: "components/auto-claim-button" */).then(c => wrapFunctional(c.default || c))
+export const Buffer = () => import('../..\\components\\Buffer.vue' /* webpackChunkName: "components/buffer" */).then(c => wrapFunctional(c.default || c))
+export const CounterV2 = () => import('../..\\components\\CounterV2.vue' /* webpackChunkName: "components/counter-v2" */).then(c => wrapFunctional(c.default || c))
+export const DefiLogo = () => import('../..\\components\\DefiLogo.vue' /* webpackChunkName: "components/defi-logo" */).then(c => wrapFunctional(c.default || c))
+export const Deposit = () => import('../..\\components\\Deposit.vue' /* webpackChunkName: "components/deposit" */).then(c => wrapFunctional(c.default || c))
+export const Energy = () => import('../..\\components\\Energy.vue' /* webpackChunkName: "components/energy" */).then(c => wrapFunctional(c.default || c))
+export const Fees = () => import('../..\\components\\Fees.vue' /* webpackChunkName: "components/fees" */).then(c => wrapFunctional(c.default || c))
+export const Footer = () => import('../..\\components\\Footer.vue' /* webpackChunkName: "components/footer" */).then(c => wrapFunctional(c.default || c))
+export const Interval = () => import('../..\\components\\Interval.vue' /* webpackChunkName: "components/interval" */).then(c => wrapFunctional(c.default || c))
+export const ItemClaim = () => import('../..\\components\\ItemClaim.vue' /* webpackChunkName: "components/item-claim" */).then(c => wrapFunctional(c.default || c))
+export const LocalAutoClaimButton = () => import('../..\\components\\LocalAutoClaimButton.vue' /* webpackChunkName: "components/local-auto-claim-button" */).then(c => wrapFunctional(c.default || c))
+export const Login = () => import('../..\\components\\Login.vue' /* webpackChunkName: "components/login" */).then(c => wrapFunctional(c.default || c))
+export const Test = () => import('../..\\components\\Test.vue' /* webpackChunkName: "components/test" */).then(c => wrapFunctional(c.default || c))
 
 // nuxt/nuxt.js#8607
 function wrapFunctional(options) {

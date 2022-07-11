@@ -172,5 +172,9 @@ export const getters = {
   },
   getRs(state) {
     return state.ressources;
+  },
+  getTokens(state) {
+    return state.tokens;
   }
+  
 }

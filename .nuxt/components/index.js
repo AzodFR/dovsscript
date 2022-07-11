@@ -2,6 +2,7 @@ export { default as AutoClaimButton } from '../..\\components\\AutoClaimButton.v
 export { default as Buffer } from '../..\\components\\Buffer.vue'
 export { default as CounterV2 } from '../..\\components\\CounterV2.vue'
 export { default as DefiLogo } from '../..\\components\\DefiLogo.vue'
+export { default as Deposit } from '../..\\components\\Deposit.vue'
 export { default as Energy } from '../..\\components\\Energy.vue'
 export { default as Fees } from '../..\\components\\Fees.vue'
 export { default as Footer } from '../..\\components\\Footer.vue'

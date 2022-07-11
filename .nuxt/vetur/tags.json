@@ -11,6 +11,9 @@
   "DefiLogo": {
     "description": "Auto imported from components/DefiLogo.vue"
   },
+  "Deposit": {
+    "description": "Auto imported from components/Deposit.vue"
+  },
   "Energy": {
     "description": "Auto imported from components/Energy.vue"
   },

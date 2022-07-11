@@ -62,6 +62,7 @@
         <b-button size="sm" v-b-tooltip.hover title="Activate this to refresh the page every 30 min." :variant="autologin ? 'success': 'danger'" @click="switchLog">AutoLogin: {{autologin ? "ON" : "OFF"}}</b-button>
       </div>
       <Fees />
+      <Deposit />
     </div>
     <div class="items" v-if="this['user/getItems']['pool'].length">
       <ItemClaim
@@ -111,6 +112,7 @@ import Buffer from "./Buffer.vue";
 import DefiLogo from "./DefiLogo.vue";
 import { mapGetters } from "vuex";
 import Fees from './Fees.vue';
+import Deposit from "./Deposit.vue";
 export default {
   name: "Test",
   data() {
@@ -125,7 +127,7 @@ export default {
       return this.$store.state.user;
     },
   },
-  components: { ItemClaim, Buffer, DefiLogo, Fees},
+  components: { ItemClaim, Buffer, DefiLogo, Fees, Deposit },
   methods: {
     switchLog: function(){
       this.autologin = !this.autologin

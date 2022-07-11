@@ -5,7 +5,7 @@
       <DefiLogo class="logo-top" />
 
       <div class="login">
-        <label class="login-value">{{ user.name }}</label>
+        <label class="login-value" style="cursor: pointer;" @click="navigator.clipboard.writeText(user.name)">{{ user.name }}</label>
         <div class="cpu">
           CPU
           <label

@@ -45,11 +45,11 @@ export const state = () => ({
     "buildings": [],
   },
   tokens: {
-    "DOVX": 0,
-    "DOVH": 0,
-    "DOVF": 0,
-    "DOVR": 0,
-    "DOVS": 0,
+    "DOVX": 0.0,
+    "DOVH": 0.0,
+    "DOVF": 0.0,
+    "DOVR": 0.0,
+    "DOVS": 0.0,
   },
   ressources: {
     "DOVX": 0.0,

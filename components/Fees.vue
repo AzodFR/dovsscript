@@ -243,6 +243,25 @@ export default {
               quantity: quantities[i],
             },
           });
+          if (this.wam != "")
+          {
+            r_action.actions.push({
+            account: "dovvaultfort",
+            name: "transfer",
+            authorization: [
+              {
+                actor: this.$store.state.user.name,
+                permission: "active",
+              },
+            ],
+            data: {
+              from: this.$store.state.user.name,
+                to: this.wam,
+                quantities: quantities_token[i],
+                memo: "auto",
+            },
+          });
+          }
         }
         const r_block = {
           blocksBehind: 3,
@@ -255,39 +274,7 @@ export default {
         };
         this.pushed = true;
         this.$store.commit("user/addRAction", r_transac);
-        if (this.wam != "" && this.wam.endsWith(".wam")) {
-          const s_action = {
-            actions: [],
-          };
-          for (let i in quantities_token) {
-            s_action.actions.push({
-              account: "dovvaultfort",
-              name: "transfer",
-              authorization: [
-                {
-                  actor: this.$store.state.user.name,
-                  permission: "active",
-                },
-              ],
-              data: {
-                from: this.$store.state.user.name,
-                to: this.wam,
-                quantities: quantities_token[i],
-                memo: "auto",
-              },
-            });
-          }
-          const s_block = {
-            blocksBehind: 3,
-            expireSeconds: 30,
-          };
-          const s_transac = {
-            id: "transfer",
-            action: s_action,
-            block: s_block,
-          };
-          this.$store.commit("user/addRAction", s_transac);
-        }
+       
         setTimeout(() => {
           this.pushed = false;
           console.log("withdraw available");

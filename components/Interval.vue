@@ -129,12 +129,22 @@ export default {
         .then((x) => x.json()).then(async (resu) => {
           const res = resu.rows
           console.log("resss", res)
-          for (let i = 0; i < 4; i++) {
+          const sym = ["DOVF", "DOVH", "DOVR", "DOVS", "DOVX"];
+          for (let i = 0; i < res.length; i++) {
             console.log("resi", res[i].data)
+            sym.splice(sym.indexOf(res[i].data.balance.split(' ')[1]), 1)
             this.$store.commit("user/setRessource", {
             type: res[i].data.balance.split(' ')[1],
             value: res[i].data.balance.split(' ')[0],
           });
+          }
+          for (let i = 0; i < sym.length; i++) {
+            if (this.$store.state.user.ressources[sym[i]] == undefined) {
+              this.$store.commit("user/setRessource", {
+                type: sym[i],
+                value: "0.0000",
+              });
+            }
           }
         })
     },
@@ -294,19 +304,19 @@ export default {
         .then((y) => {
           console.log("tokens", y)
           const sym = ["DOVF", "DOVH", "DOVR", "DOVS", "DOVX"];
-          for (let i = 0; i < 5; i++) {
-            if (i >= y.length) {
-              this.$store.commit("user/setToken", {
-                type: sym[i],
-                value: "0.0000",
-              });
-            } else {
+          for (let i = 0; i < y.length; i++) {
               console.log(y[i].split(" ")[0], y[i].split(" ")[1])
+              sym.splice(sym.indexOf(y[i].split(" ")[1]), 1)
               this.$store.commit("user/setToken", {
                 type: y[i].split(" ")[1],
                 value: y[i] != undefined ? y[i].split(" ")[0] : "0.0000",
               });
-            }
+          }
+          for (let i = 0; i < sym.length; i++) {
+            this.$store.commit("user/setToken", {
+              type: sym[i],
+              value: "0.0000",
+            });
           }
         });
 

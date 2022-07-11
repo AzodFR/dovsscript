@@ -80,6 +80,8 @@
           action: 'claim',
         }"
       />
+      </div>
+      <div class="items" v-if="this['user/getItems']['buildings'].length"></div>
       <ItemClaim
         ref="buildings"
         title="Buildings"

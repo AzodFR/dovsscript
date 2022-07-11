@@ -189,7 +189,7 @@ export default {
         })
     },
     fetchStake: async function () {
-      await fetch("https://chain.wax.io/v1/chain/get_account", {
+      await fetch("https://wax.cryptolions.io/v1/chain/get_account", {
         "credentials": "omit",
         "headers": {
           "Accept-Language": "fr,fr-FR;q=0.8,en-US;q=0.5,en;q=0.3",

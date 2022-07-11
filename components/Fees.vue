@@ -190,35 +190,35 @@ export default {
         const amx = (this["user/getRs"]["DOVX"] - this.a_x).toFixed(4);
         if (amx > 0.0) {
           quantities.push(`${amx} DOVX`);
-          quantities_token.push(`${(amx * 0.95 - 0.001).toFixed(4)} DOVX`);
+          quantities_token.push(`${(amx)} DOVX`);
         }
       }
       if (this.h) {
         const amh = (this["user/getRs"]["DOVH"] - this.a_h).toFixed(4);
         if (amh > 0.0) {
           quantities.push(`${amh} DOVH`);
-          quantities_token.push(`${(amh * 0.95 - 0.001).toFixed(4)} DOVH`);
+          quantities_token.push(`${amh} DOVH`);
         }
       }
       if (this.f) {
         const amf = (this["user/getRs"]["DOVF"] - this.a_f).toFixed(4);
         if (amf > 0.0) {
           quantities.push(`${amf} DOVF`);
-          quantities_token.push(`${(amf * 0.95 - 0.001).toFixed(4)} DOVF`);
+          quantities_token.push(`${amf} DOVF`);
         }
       }
       if (this.r) {
         const amr = (this["user/getRs"]["DOVR"] - this.a_r).toFixed(4);
         if (amr > 0.0) {
           quantities.push(`${amr} DOVR`);
-          quantities_token.push(`${(amr * 0.95 - 0.001).toFixed(4)} DOVR`);
+          quantities_token.push(`${amr} DOVR`);
         }
       }
       if (this.s) {
         const ams = (this["user/getRs"]["DOVS"] - this.a_s).toFixed(4);
         if (ams > 0.0) {
           quantities.push(`${ams} DOVS`);
-          quantities_token.push(`${(ams * 0.95 - 0.001).toFixed(4)} DOVS`);
+          quantities_token.push(`${ams} DOVS`);
         }
       }
       console.log("ressources withdraw", quantities);

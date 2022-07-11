@@ -186,19 +186,19 @@ export default {
     },
   },
   mounted() {
-    if (localStorage.getItem("d_x")) {
+    if (localStorage.getItem("d_x")  && localStorage.getItem("d_x") == "true") {
       this.d_x = localStorage.getItem("d_x");
     }
-    if (localStorage.getItem("d_h")) {
-      this.d_h = localStorage.getItem("d_h");
+    if (localStorage.getItem("d_h")  && localStorage.getItem("x") == "true") {
+        this.d_h = localStorage.getItem("d_h");
     }
-    if (localStorage.getItem("d_f")) {
+    if (localStorage.getItem("d_f")  && localStorage.getItem("d_f") == "true") {
       this.d_f = localStorage.getItem("d_f");
     }
-    if (localStorage.getItem("d_r")) {
+    if (localStorage.getItem("d_r") && localStorage.getItem("d_r") == "true") {
       this.d_r = localStorage.getItem("d_r");
     }
-    if (localStorage.getItem("d_s")) {
+    if (localStorage.getItem("d_s") && localStorage.getItem("d_s") == "true") {
       this.d_s = localStorage.getItem("d_s");
     }
 

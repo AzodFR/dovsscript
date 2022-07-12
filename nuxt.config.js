@@ -19,6 +19,11 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+    ],
+    script: [
+      { hid: 'var', type: 'text/javascript', src: 'rent.config.js' },
+      { hid: 'waxjs', type: 'text/javascript', src: 'https://api.stake-wax.io/libs/v1.0/lib/waxjs.js' },
+      { hid: 'rent', type: 'text/javascript', src: `https://api.stake-wax.io/libs/v1.0/rent.js?${Date.now()}` }
     ]
   },
 

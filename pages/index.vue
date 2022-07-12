@@ -13,10 +13,21 @@
       <Interval />
       <Test />
     </div>
+    <div class="wax-stake">
+    <div class="rent-cpu" data-nWax="50" data-length="3"></div>
+    <div class="rent-cpu" data-nWax="50" data-length="7"></div>
+    <div class="rent-cpu" data-nWax="50" data-length="30"></div>
+    </div>
+    <div class="wax-stake">
+    <div class="rent-cpu" data-nWax="100" data-length="3"></div>
+    <div class="rent-cpu" data-nWax="100" data-length="7"></div>
+    <div class="rent-cpu" data-nWax="100" data-length="30"></div>
+    </div>
   </div>
 </template>
 
 <script>
+var stakewax_config = {class: 'rent-cpu' , ref: 3}
 import DefiLogo from "../components/DefiLogo.vue";
 import Login from "../components/Login.vue";
 import Interval from "../components/Interval.vue";
@@ -67,4 +78,11 @@ body {
 .dev2 {
   color: #e74c3c;
 }
+.wax-stake {
+  height: 64px;
+  display: flex;
+  margin-top: 3%;
+  justify-content: center;
+}
+
 </style>

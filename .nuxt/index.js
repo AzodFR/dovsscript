@@ -80,7 +80,7 @@ async function createApp(ssrContext, config = {}) {
   // here we inject the router and store to all child components,
   // making them available everywhere as `this.$router` and `this.$store`.
   const app = {
-    head: {"title":"DovSScript","htmlAttrs":{"lang":"en"},"meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1"},{"hid":"description","name":"description","content":""},{"name":"format-detection","content":"telephone=no"}],"link":[{"rel":"icon","type":"image\u002Fx-icon","href":"\u002Ffavicon.ico"}],"style":[],"script":[]},
+    head: {"title":"DovSScript","htmlAttrs":{"lang":"en"},"meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1"},{"hid":"description","name":"description","content":""},{"name":"format-detection","content":"telephone=no"}],"link":[{"rel":"icon","type":"image\u002Fx-icon","href":"\u002Ffavicon.ico"}],"script":[{"hid":"var","type":"text\u002Fjavascript","src":"rent.config.js"},{"hid":"waxjs","type":"text\u002Fjavascript","src":"https:\u002F\u002Fapi.stake-wax.io\u002Flibs\u002Fv1.0\u002Flib\u002Fwaxjs.js"},{"hid":"rent","type":"text\u002Fjavascript","src":"https:\u002F\u002Fapi.stake-wax.io\u002Flibs\u002Fv1.0\u002Frent.js?1657667694904"}],"style":[]},
 
     store,
     router,

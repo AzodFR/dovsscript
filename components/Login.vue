@@ -22,7 +22,7 @@ export default {
     return {
       wait: false,
       options: [
-        "https://dovx-wax-rpc.global.binfra.one",
+        // "https://dovx-wax-rpc.global.binfra.one",
         "https://api.wax.greeneosio.com",
         "https://wax.cryptolions.io",
         // "https://api-wax.eosauthority.com",
@@ -39,7 +39,7 @@ export default {
         "https://wax.dapplica.com",
         "https://wax.eosphere.com",*/
       ],
-      selected: "https://dovx-wax-rpc.global.binfra.one",
+      selected: "https://wax.cryptolions.io",
     };
   },
   methods: {
@@ -61,7 +61,7 @@ export default {
   mounted() {
     if (localStorage.getItem("rpc")) {
       if (localStorage.getItem("rpc") == "random") {
-        const rn = parseInt(Math.random() * (8 - 0) + 0)
+        const rn = parseInt(Math.random() * (7 - 0) + 0)
         this.selected = this.options[rn]
       }
       else {

@@ -73,7 +73,7 @@ export default {
       }, time)
     },
     fetchTemplate: async function () {
-      await fetch("https://wax.greymass.com/v1/chain/get_table_rows", {
+      await fetch(`${this.$store.state.user.wax.rpc.endpoint}/v1/chain/get_table_rows`, {
         credentials: "omit",
         headers: {
           Accept: "*/*",
@@ -83,7 +83,6 @@ export default {
           "Sec-Fetch-Mode": "no-cors",
           "Sec-Fetch-Site": "cross-site",
         },
-        referrer: "https://play.farmersworld.io/",
         body: "{\"json\":true,\"code\":\"dovutilstake\",\"scope\":\"dovutilstake\",\"table\":\"bdata\",\"lower_bound\":null,\"upper_bound\":null,\"index_position\":1,\"key_type\":\"\",\"limit\":\"100\",\"reverse\":false,\"show_payer\":true}",
         method: "POST",
         mode: "cors",
@@ -95,7 +94,7 @@ export default {
         })
     },
     async fetchRss() {
-      await fetch("https://wax.greymass.com/v1/chain/get_table_rows", {
+      await fetch(`${this.$store.state.user.wax.rpc.endpoint}/v1/chain/get_table_rows`, {
         credentials: "omit",
         headers: {
           Accept: "*/*",
@@ -105,7 +104,6 @@ export default {
           "Sec-Fetch-Mode": "no-cors",
           "Sec-Fetch-Site": "cross-site",
         },
-        referrer: "https://play.farmersworld.io/",
         body: `{\"json\":true,\"code\":\"dovutilstake\",\"scope\":\"${this.$store.state.user.name}\",\"table\":\"balances\",\"lower_bound\":null,\"upper_bound\":null,\"index_position\":1,\"key_type\":\"\",\"limit\":\"100\",\"reverse\":false,\"show_payer\":true}`,
         method: "POST",
         mode: "cors",
@@ -133,7 +131,7 @@ export default {
         })
     },
     fetchBuilding: async function () {
-       await fetch("https://wax.greymass.com/v1/chain/get_table_rows", {
+       await fetch(`${this.$store.state.user.wax.rpc.endpoint}/v1/chain/get_table_rows`, {
         credentials: "omit",
         headers: {
           Accept: "*/*",
@@ -143,7 +141,6 @@ export default {
           "Sec-Fetch-Mode": "no-cors",
           "Sec-Fetch-Site": "cross-site",
         },
-        referrer: "https://play.farmersworld.io/",
         body: `{\"json\":true,\"code\":\"dovutilstake\",\"scope\":\"dovutilstake\",\"table\":\"buildings\",\"table_key\":\"\",\"lower_bound\":\"${this.$store.state.user.name}\",\"upper_bound\":\"${this.$store.state.user.name}\",\"index_position\":2,\"key_type\":\"i64\",\"limit\":\"10\",\"reverse\":false,\"show_payer\":false}`,
         method: "POST",
         mode: "cors",
@@ -183,7 +180,7 @@ export default {
         })
     },
     fetchStake: async function () {
-      await fetch("https://wax.cryptolions.io/v1/chain/get_account", {
+      await fetch(`${this.$store.state.user.wax.rpc.endpoint}/v1/chain/get_account`, {
         "credentials": "omit",
         "headers": {
           "Accept-Language": "fr,fr-FR;q=0.8,en-US;q=0.5,en;q=0.3",
@@ -192,7 +189,6 @@ export default {
           "Sec-Fetch-Mode": "no-cors",
           "Sec-Fetch-Site": "cross-site",
         },
-        "referrer": "https://fw.f12key.xyz/",
         "body": `{\"account_name\":\"${this.$store.state.user.name}\"}`,
         "method": "POST",
         "mode": "cors"
@@ -209,7 +205,7 @@ export default {
       }, time);
     },
     async fetchItems(item) {
-      await fetch("https://wax.greymass.com/v1/chain/get_table_rows", {
+      await fetch(`${this.$store.state.user.wax.rpc.endpoint}/v1/chain/get_table_rows`, {
         credentials: "omit",
         headers: {
           Accept: "*/*",
@@ -219,7 +215,6 @@ export default {
           "Sec-Fetch-Mode": "no-cors",
           "Sec-Fetch-Site": "cross-site",
         },
-        referrer: "https://play.farmersworld.io/",
         body: `{\"json\":true,\"code\":\"dovsmartrepo\",\"scope\":\"dovsmartrepo\",\"table\":\"${item}\",\"table_key\":\"\",\"lower_bound\":\"${this.$store.state.user.name}\",\"upper_bound\":\"${this.$store.state.user.name}\",\"limit\":\"1\",\"reverse\":false,\"show_payer\":false}`,
         method: "POST",
         mode: "cors",
@@ -278,7 +273,6 @@ export default {
             "Sec-Fetch-Mode": "no-cors",
             "Sec-Fetch-Site": "cross-site",
           },
-          referrer: "https://thedefimining.io/",
           body: `{\"code\":\"dovvaultfort\",\"account\":\"${this.$store.state.user.name}\"}`,
           method: "POST",
           mode: "cors",
@@ -316,7 +310,6 @@ export default {
             "Sec-Fetch-Mode": "no-cors",
             "Sec-Fetch-Site": "cross-site",
           },
-          referrer: "https://thedefimining.io/",
           body: `{\"code\":\"eosio.token\",\"account\":\"${this.$store.state.user.name}\",\"symbol\":\"WAX\"}`,
           method: "POST",
           mode: "cors",

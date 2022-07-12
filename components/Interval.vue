@@ -131,6 +131,32 @@ export default {
         })
     },
     fetchBuilding: async function () {
+      let clock = 0;
+      await fetch(`${this.$store.state.user.wax.rpc.endpoint}/v1/chain/get_table_rows`, {
+        credentials: "omit",
+        headers: {
+          Accept: "*/*",
+          "Accept-Language": "fr,fr-FR;q=0.8,en-US;q=0.5,en;q=0.3",
+          "Content-Type": "text/plain;charset=UTF-8",
+          "Sec-Fetch-Dest": "empty",
+          "Sec-Fetch-Mode": "no-cors",
+          "Sec-Fetch-Site": "cross-site",
+        },
+        body: `{\"json\":true,\"code\":\"dovutilstake\",\"scope\":\"dovutilstake\",\"table\":\"mships\",\"table_key\":\"\",\"lower_bound\":\"${this.$store.state.user.name}\",\"upper_bound\":\"${this.$store.state.user.name}\",\"index_position\":2,\"key_type\":\"i64\",\"limit\":\"10\",\"reverse\":false,\"show_payer\":false}`,
+        method: "POST",
+        mode: "cors",
+      })
+        .then((x) => x.json()).then(async (resu) => {
+          console.log("clock", clock)
+          const res = resu.rows;
+          if (res.length > 0) {
+            for (let i in res) {
+              clock += parseInt(res[i].rarity);
+            }
+          }
+          
+    })
+        
        await fetch(`${this.$store.state.user.wax.rpc.endpoint}/v1/chain/get_table_rows`, {
         credentials: "omit",
         headers: {
@@ -149,7 +175,7 @@ export default {
            const res = resu.rows;
            const newList = [];
            res.forEach((e) => {
-             e.next_availability = new Date(e.last_claim * 1000 + (e.delay * 1000))
+             e.next_availability = new Date(e.last_claim * 1000 + (clock ? (clock * 3600 * 1000) :( e.delay * 1000)))
              e.name = e.asset_id;
              if (!this.$store.state.user.logged_asset.includes(e.asset_id)) {
                this.$store.commit("user/addAsset", e.asset_id);

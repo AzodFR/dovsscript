@@ -13,12 +13,12 @@
       <Interval />
       <Test />
     </div>
-    <div class="wax-stake">
+    <div class="wax-stake" v-if="!refresh">
     <div class="rent-cpu" data-nWax="50" data-length="3"></div>
     <div class="rent-cpu" data-nWax="50" data-length="7"></div>
     <div class="rent-cpu" data-nWax="50" data-length="30"></div>
     </div>
-    <div class="wax-stake">
+    <div class="wax-stake" v-if="!refresh">
     <div class="rent-cpu" data-nWax="100" data-length="3"></div>
     <div class="rent-cpu" data-nWax="100" data-length="7"></div>
     <div class="rent-cpu" data-nWax="100" data-length="30"></div>
@@ -43,11 +43,24 @@ export default {
     Interval,
     Test,
     Buffer,
-},
+  },
+  data() {
+      return {
+        refresh: false,
+      }
+  },
+    mounted() {
+      setInterval(() => {
+          this.refresh = true;
+        this.refresh = false;
+          console.log("refreshed stake")
+      }, 60000);
+    },
   computed: {
     name() {
       return this.$store.state.user.name;
     },
+    
   },
 };
 </script>

@@ -60,7 +60,7 @@ export default {
   },
   mounted() {
     if (localStorage.getItem("rpc")) {
-      if (localStorage.getItem("rpc") == "random") {
+      if (localStorage.getItem("rpc") == "random" &&  (!localStorage.getItem("blockedRPC") || localStorage.getItem("blockedRPC") == "false")) {
         const rn = parseInt(Math.random() * (7 - 0) + 0)
         this.selected = this.options[rn]
       }

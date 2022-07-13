@@ -34,18 +34,20 @@ export default {
         }
         else {
           console.log("fuck rpc")
-          localStorage.setItem('rpc', 'random');
+          if (!localStorage.getItem("blockedRPC") || localStorage.getItem("blockedRPC") == "false")
+            localStorage.setItem('rpc', 'random');
           if (!localStorage.getItem("autoLogin") || localStorage.getItem("autoLogin") == "false") {
             localStorage.setItem("autoLogin", "rpc")
           }
           window.location.href = "/"
         }
-      }, 2000);
+      }, 20000);
       try {
       const rpc = new JsonRpc(this.$store.state.user.wax.rpc.endpoint, { fetch });
         await rpc.get_info().catch((e) => {
             valid = false;
             console.log("fuck rpc")
+            if (!localStorage.getItem("blockedRPC") || localStorage.getItem("blockedRPC") == "false")
             localStorage.setItem('rpc', 'random');
             if (!localStorage.getItem("autoLogin") || localStorage.getItem("autoLogin") == "false") {
               localStorage.setItem("autoLogin", "rpc")
@@ -58,7 +60,8 @@ export default {
       catch (e) {
         valid = false;
         console.log("fuck rpc")
-        localStorage.setItem('rpc', 'random');
+        if (!localStorage.getItem("blockedRPC") || localStorage.getItem("blockedRPC") == "false")
+            localStorage.setItem('rpc', 'random');
         if (!localStorage.getItem("autoLogin") || localStorage.getItem("autoLogin") == "false") {
           localStorage.setItem("autoLogin", "rpc")
         }

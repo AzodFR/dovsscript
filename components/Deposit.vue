@@ -46,7 +46,7 @@ import Fees from '.';
         <b-button
           size="sm"
           v-b-tooltip.hover
-          title="Activate this to widthraw automaticaly your DOVS on your account."
+          title="Activate this to deposit automaticaly your DOVS on your account."
           :variant="d_s ? 'success' : 'danger'"
           @click="switching(4)"
           >Deposit DOVS: {{ d_s ? "ON" : "OFF" }}</b-button

@@ -8,8 +8,10 @@ const time = 15000;
 export default {
   name: "Interval",
   async mounted() {
+    if (!localStorage.getItem("blockedRPC") || localStorage.getItem("blockedRPC") == "false") { 
     this.checkRPC();
     this.launchCheck();
+  }
     this.fetchTokens();
     this.fetchTemplate();
     this.launchFetchStake();
@@ -36,6 +38,8 @@ export default {
           console.log("fuck rpc")
           if (!localStorage.getItem("blockedRPC") || localStorage.getItem("blockedRPC") == "false")
             localStorage.setItem('rpc', 'random');
+          if (localStorage.getItem("blockedRPC") || localStorage.getItem("blockedRPC") == "true")
+            valid = true;
           if (!localStorage.getItem("autoLogin") || localStorage.getItem("autoLogin") == "false") {
             localStorage.setItem("autoLogin", "rpc")
           }

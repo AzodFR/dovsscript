@@ -32,7 +32,6 @@ export default {
         "https://wax.dapplica.io",
         "https://wax.eosdac.io",
         "https://wax.eoseoul.io",
-        "https://api.wax.liquidstudios.io",
         "https://wax.api.eosnation.io",
         "https://api.waxsweden.org",
       ],
